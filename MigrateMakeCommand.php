@@ -1,4 +1,5 @@
-    public function handle()
+<?php    
+public function handle()
     {
         $ConfirmationMessage = DbMigrateList::ConfirmMigrationMessage(); 
         if ($this->confirm($ConfirmationMessage)) {
