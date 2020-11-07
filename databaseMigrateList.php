@@ -22,7 +22,7 @@ class DbMigrateList
     {
         //PATH =>C:\wamp64\www\laravel_test\blog\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations
         $message = 'Are you sure wish to continue?. ' . "\r\n";
-        $message .= ' Please make sure to pass argument `--path=/database/migrations/common_db` for the database `db_common` ' . "\r\n";
+        $message .= ' Please make sure to pass argument `--path=/database/migrations/common_db` for the database `common_db` ' . "\r\n";
         return  $message;
     }
 }
