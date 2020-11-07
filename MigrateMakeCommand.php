@@ -1,4 +1,5 @@
-<?php    
+<?php   
+//PATH = C:\wamp64\www\laravel_test\blog\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations\MigrateMakeCommand.php
 public function handle()
     {
         $ConfirmationMessage = DbMigrateList::ConfirmMigrationMessage(); //NEW LINE FOR CONFIRMATION
