@@ -1,7 +1,7 @@
 <?php    
 public function handle()
     {
-        $ConfirmationMessage = DbMigrateList::ConfirmMigrationMessage(); 
+        $ConfirmationMessage = DbMigrateList::ConfirmMigrationMessage(); //NEW LINE FOR CONFIRMATION
         if ($this->confirm($ConfirmationMessage)) {
             // It's possible for the developer to specify the tables to modify in this
             // schema operation. The developer may also specify if this table needs
@@ -32,7 +32,7 @@ public function handle()
             // the migration out, we will dump-autoload for the entire framework to
             // make sure that the migrations are registered by the class loaders.
             $this->writeMigration($name, $table, $create);
-            $this->info("Please make sure to add `Schema::connection('db_auth')->create(` for the DB `db_auth`");
+            $this->info("Please make sure to add `Schema::connection('common_db')->create(` for the DB `common_db`"); //NEW LINE FOR CONFIRM common_db
             $this->composer->dumpAutoloads();
         }
     }
