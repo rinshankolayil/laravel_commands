@@ -52,6 +52,7 @@ class DbMigrateList
         $message .= ' 2 - Please make sure to pass argument `--common_db=' . self::getDefaultDbPath('folder_name') . '` for the database `' . self::getDefaultDbPath('folder_name') . '`' . "\r\n";
         return  $message;
     }
+    
     static public function ConfirmMigrationMessage()
     {
         //PATH =>C:\wamp64\www\laravel_test\blog\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations
