@@ -26,10 +26,10 @@ class DbMigrateList
         $default_db = "";
         foreach (Config::get('database.connections') as $name => $details) {
             if ((!isset($details['add_to_migrate']) || (isset($details['add_to_migrate']) && $details['add_to_migrate'] == true))) {
-                if ($details['is_a_company'] == "yes") {
+                if ($details['key_1_test'] == "yes") {
                     array_push($dbNames, $name);
-                    $dbAll['companies'][] = $name;
-                } else if ($details['is_a_company'] == "default") {
+                    $dbAll['key_1_test'][] = $name;
+                } else if ($details['key_1_test'] == "default") {
                     $default_db = $name;
                     $dbAll['default'][] = $name;
                 }
@@ -64,7 +64,7 @@ class DbMigrateList
     {
         $sql = "SELECT * FROM rollback_approval WHERE status='A'";
         $result = DB::connection(self::getDBNames('default'))->select($sql);
-        ASJ::PRE($result);
+        return $result;
     }
 
     static public function renameMigratedFile($path, $file)
