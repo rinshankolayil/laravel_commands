@@ -19,24 +19,30 @@ class DbMigrateList
         );
     }
 
-    static public function getDBNames($common_db = '')
+    static public function getDBNames($return_type = '')
     {
         $dbNames = [];
+        $dbAll = [];
         $default_db = "";
         foreach (Config::get('database.connections') as $name => $details) {
             if ((!isset($details['add_to_migrate']) || (isset($details['add_to_migrate']) && $details['add_to_migrate'] == true))) {
                 if ($details['is_a_company'] == "yes") {
                     array_push($dbNames, $name);
+                    $dbAll['companies'][] = $name;
                 } else if ($details['is_a_company'] == "default") {
                     $default_db = $name;
+                    $dbAll['default'][] = $name;
                 }
             }
         }
 
-        if ($common_db == 'default') {
-            return $default_db; // COMMON DB
+        if ($return_type == 'default') {
+            return $default_db;
+        } else if ($return_type == "all") {
+            return $dbAll;
+        } else {
+            return $dbNames;
         }
-        return $dbNames;
     }
 
     static public function ConfirmationMessage()
