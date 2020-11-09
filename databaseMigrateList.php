@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Console\Commands;
-
-use App\Libraries\ASJ;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
