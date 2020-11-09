@@ -57,10 +57,10 @@ class DbMigrateList
             $file_content = file_get_contents($full_path);
             $file_replaced = str_replace("Schema::create(", "Schema::connection('" . $dbName . "')->create(", $file_content);
             $file_replaced = str_replace("Schema::dropIfExists(", "Schema::connection('" . $dbName . "')->dropIfExists(", $file_replaced);
-            $down_function = "//PLEASE MAKE SURE TO VERIFY `Schema::connection('" . $dbName . "')`\r\n\tpublic function down()";
-            $up_function = "//PLEASE MAKE SURE TO VERIFY `Schema::connection('" . $dbName . "')`\r\n\tpublic function up()";
-            $file_replaced = str_replace("public function down()", $down_function, $file_replaced);
-            $file_replaced = str_replace("public function up()", $up_function, $file_replaced);
+            $down_replace = "//PLEASE MAKE SURE TO VERIFY `Schema::connection('" . $dbName . "')`\r\n\tpublic function down()";
+            $up_replace = "//PLEASE MAKE SURE TO VERIFY `Schema::connection('" . $dbName . "')`\r\n\tpublic function up()";
+            $file_replaced = str_replace("public function down()", $down_replace, $file_replaced);
+            $file_replaced = str_replace("public function up()", $up_replace, $file_replaced);
             file_put_contents($full_path, $file_replaced);
         }
     }
