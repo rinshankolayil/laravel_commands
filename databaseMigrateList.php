@@ -62,9 +62,8 @@ class DbMigrateList
 
     static public function ConfirmRollBackApproved()
     {
-        $sql = "SELECT * FROM rollback_approval_dummy_table_name WHERE status='A'";
-        $result = DB::connection(self::getDBNames('default'))->select($sql);
-        return $result;
+        $count = DB::connection(self::getDBNames('default'))->table('rollback_approval_dummy_table_name')->where('status', 'A')->count();
+        return $count;
     }
 
     static public function renameMigratedFile($path, $file)
