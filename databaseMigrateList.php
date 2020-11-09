@@ -62,7 +62,11 @@ class DbMigrateList
 
     static public function ConfirmRollBackApproved()
     {
-        $count = DB::connection(self::getDBNames('default'))->table('rollback_approval_dummy_table_name')->where('status', 'A')->count();
+        $count = DB::connection(self::getDBNames('default'))
+            ->table('rollback_approval_dummy_table')
+            ->where('status', 'A')
+            ->where('pc_user_name_env', 'username')
+            ->count();
         return $count;
     }
 
