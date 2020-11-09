@@ -25,7 +25,7 @@ class DbMigrateList
         $dbAll = [];
         $default_db = "";
         foreach (Config::get('database.connections') as $name => $details) {
-            if ((!isset($details['add_to_migrate']) || (isset($details['add_to_migrate']) && $details['add_to_migrate'] == true))) {
+            if (isset($details['add_to_migrate']) && $details['add_to_migrate'] == true) {
                 if ($details['key_1_test'] == "yes") {
                     array_push($dbNames, $name);
                     $dbAll['key_1_test'][] = $name;
@@ -62,7 +62,7 @@ class DbMigrateList
 
     static public function ConfirmRollBackApproved()
     {
-        $sql = "SELECT * FROM rollback_approval WHERE status='A'";
+        $sql = "SELECT * FROM rollback_approval_dummy_table_name WHERE status='A'";
         $result = DB::connection(self::getDBNames('default'))->select($sql);
         return $result;
     }
