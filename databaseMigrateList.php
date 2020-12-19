@@ -58,7 +58,20 @@ class DbMigrateList
         //PATH =>C:\wamp64\www\laravel_test\blog\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations
         $message = 'Are you sure wish to continue?. ' . "\r\n";
         $message .= ' Please make sure to pass argument `--path=/database/migrations/' . self::getDefaultDbPath('folder_name') . '` for the database `' . self::getDefaultDbPath('folder_name') . '` ' . "\r\n";
-        return  $message;
+        return  [
+            'message' => $message,
+            'validate' => true
+        ];
+    }
+
+    static public function InfoMigrateMessage()
+    {
+        //PATH =>C:\wamp64\www\laravel_test\blog\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations
+        $message = "Please make sure to add `Schema::connection('common_db')->create(` for the DB `common_db`";
+        return [
+            'message' => $message,
+            'display' => true
+        ];
     }
 
     static public function ConfirmRollBackApproved()
