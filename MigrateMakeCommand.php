@@ -2,29 +2,28 @@
 //PATH = C:\wamp64\www\laravel_test\blog\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations\MigrateMakeCommand.php
 public function handle()
     {
-        $ConfirmationMessage = DbMigrateList::ConfirmMigrationMessage(); //NEW LINE FOR CONFIRMATION
-        if ($this->confirm($ConfirmationMessage)) {
-            // It's possible for the developer to specify the tables to modify in this
-            // schema operation. The developer may also specify if this table needs
-            // to be freshly created so we can create the appropriate migrations.
+        // It's possible for the developer to specify the tables to modify in this
+        // schema operation. The developer may also specify if this table needs
+        // to be freshly created so we can create the appropriate migrations.
+        $ConfirmationMessage = DbMigrateList::ConfirmMigrationMessage();
+        if ($ConfirmationMessage['validate']) {
+            $validate_message = $this->confirm($ConfirmationMessage);
+        } else {
+            $validate_message = true;
+        }
+        if ($validate_message) {
             $name = Str::snake(trim($this->input->getArgument('name')));
 
             $table = $this->input->getOption('table');
 
             $create = $this->input->getOption('create') ?: false;
 
-            // If no table was given as an option but a create option is given then we
-            // will use the "create" option as the table name. This allows the devs
-            // to pass a table name into this option as a short-cut for creating.
             if (!$table && is_string($create)) {
                 $table = $create;
 
                 $create = true;
             }
 
-            // Next, we will attempt to guess the table name if this the migration has
-            // "create" in the name. This will allow us to provide a convenient way
-            // of creating migrations that create new tables for the application.
             if (!$table) {
                 [$table, $create] = TableGuesser::guess($name);
             }
@@ -33,7 +32,10 @@ public function handle()
             // the migration out, we will dump-autoload for the entire framework to
             // make sure that the migrations are registered by the class loaders.
             $this->writeMigration($name, $table, $create);
-            $this->info("Please make sure to add `Schema::connection('common_db')->create(` for the DB `common_db`"); //NEW LINE FOR CONFIRM common_db
+            $InfoMigrateMessage = DbMigrateList::InfoMigrateMessage();
+            if ($InfoMigrateMessage['display']) {
+                $this->info($InfoMigrateMessage['message']); //NEW LINE FOR CONFIRM common_db
+            }
             $this->composer->dumpAutoloads();
         }
     }
